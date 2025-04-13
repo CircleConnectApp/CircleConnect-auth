@@ -5,8 +5,8 @@ import os
 load_dotenv()
 
 def JWTCreation(data: dict):
-    expirationTime = datetime.now(timezone.utc) + timedelta(minutes=60)
-    payload = { **data, "expiration": expirationTime }
+    expirationTime = datetime.now(timezone.utc) + timedelta(minutes=60) 
+    payload = { **data, "expiration": expirationTime.timestamp() }
     encoded_jwt = jwt.encode(payload, os.getenv("JWT_SECRET_KEY"), algorithm=os.getenv("JWT_Algorithm"))    
     return encoded_jwt
 
